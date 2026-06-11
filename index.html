@@ -597,7 +597,47 @@ const obs = new IntersectionObserver(entries=>{
 },{threshold:.1});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 
-// Counter
+
+// YouTube Live Stats
+const API_KEY = 'AIzaSyCKnb2xMPhF3FNliERj8GJysV6tG3-6z60';
+const CHANNEL_ID = 'UCb0944sYYOhZmhjEpiwFOOg';
+
+async function fetchYTStats() {
+  try {
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`
+    );
+
+    const data = await res.json();
+
+    if (!data.items || !data.items.length) return;
+
+    const stats = data.items[0].statistics;
+
+    const subs = parseInt(stats.subscriberCount);
+    const views = parseInt(stats.viewCount);
+
+    document.querySelectorAll('.hstat').forEach(card => {
+      const label = card.querySelector('.hstat-label')?.textContent || '';
+
+      if (label.includes('Subscribers')) {
+        card.querySelector('.hstat-num').textContent =
+          subs >= 1000 ? (subs / 1000).toFixed(2) + 'K+' : subs + '+';
+      }
+
+      if (label.includes('Views')) {
+        card.querySelector('.hstat-num').textContent =
+          views >= 1000 ? Math.floor(views / 1000) + 'K+' : views + '+';
+      }
+    });
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+fetchYTStats();
+  // Counter
 function runCounters(){
   document.querySelectorAll('.stat-num[data-target]').forEach(el=>{
     const target = +el.dataset.target, sfx = el.dataset.suffix||'';
