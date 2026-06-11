@@ -629,13 +629,31 @@ async function fetchYTStats() {
           views >= 1000 ? Math.floor(views / 1000) + 'K+' : views + '+';
       }
     });
+document.querySelectorAll('.stat-card').forEach(card => {
+  const label = card.querySelector('.stat-label')?.textContent || '';
 
+  if (label.includes('Subscribers')) {
+    const num = card.querySelector('.stat-num');
+    num.textContent =
+      subs >= 1000 ? (subs / 1000).toFixed(2) + 'K+' : subs + '+';
+    num.removeAttribute('data-target');
+  }
+
+  if (label.includes('Views')) {
+    const num = card.querySelector('.stat-num');
+    num.textContent =
+      views >= 1000 ? Math.floor(views / 1000) + 'K+' : views + '+';
+    num.removeAttribute('data-target');
+  }
+});
   } catch (e) {
     console.log(e);
   }
 }
 
 fetchYTStats();
+  setInterval(fetchYTStats, 60000);
+  
   // Counter
 function runCounters(){
   document.querySelectorAll('.stat-num[data-target]').forEach(el=>{
