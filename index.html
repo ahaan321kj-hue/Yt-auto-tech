@@ -825,30 +825,62 @@ document
   .appendChild(renderer.domElement);
 
 camera.position.z = 5;
+const particlesCount = 4000;
 
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({
-  color: 0x00ff88,
-  wireframe: true
+const positions = new Float32Array(
+  particlesCount * 3
+);
+
+for(let i = 0; i < particlesCount * 3; i++){
+  positions[i] = (Math.random() - 0.5) * 80;
+}
+
+const geometry = new THREE.BufferGeometry();
+
+geometry.setAttribute(
+  'position',
+  new THREE.BufferAttribute(
+    positions,
+    3
+  )
+);
+
+const material = new THREE.PointsMaterial({
+  size: 0.15,
+  color: 0x00ffcc
 });
 
-const cube = new THREE.Mesh(
+const particles = new THREE.Points(
   geometry,
   material
 );
 
-scene.add(cube);
+scene.add(particles);
 
-function animate() {
+function animate(){
   requestAnimationFrame(animate);
 
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  particles.rotation.y += 0.0015;
+  particles.rotation.x += 0.0003;
 
   renderer.render(scene, camera);
 }
 
 animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect =
+    window.innerWidth /
+    window.innerHeight;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+  );
+});
+
 </script>
 </body>
 </html>
