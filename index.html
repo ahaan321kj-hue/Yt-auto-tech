@@ -821,10 +821,16 @@ async function sendForm(){
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('tesseract-container').appendChild(renderer.domElement);
 
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.autoRotate = AUTO_SPIN;
-        controls.autoRotateSpeed = 2.0;
+      const controls = new OrbitControls(camera, renderer.domElement);
+
+controls.enableDamping = true;
+controls.enablePan = false;
+controls.enableZoom = false;
+controls.enableRotate = true;
+controls.touches.ONE = THREE.TOUCH.ROTATE;
+controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
+controls.autoRotate = AUTO_SPIN;
+controls.autoRotateSpeed = 2.0;
 
         // POST PROCESSING
         const composer = new EffectComposer(renderer);
