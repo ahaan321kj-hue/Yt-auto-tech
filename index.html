@@ -539,9 +539,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 5%;d
         </a>
       </div>
       <div class="contact-form reveal">
-        <div class="form-row">
-          <input type="text" id="fName" name="name" placeholder="e.g Rahul Sharma"/>
-          <input type="email" id="fEmail" name="email" placeholder="you@email.com"/>
+      <div class="form-group">
+  <label>Your Name</label>
+  <input type="text" id="fName" name="name" placeholder="e.g Rahul Sharma"/>
+</div>
+
+<div class="form-group">
+  <label>Email</label>
+  <input type="email" id="fEmail" name="email" placeholder="you@email.com"/>
         </div>
         <div class="form-group">
           <select id="fType" name="service">
@@ -559,7 +564,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 5%;d
             <option>Other</option>
           </select>
         </div>
-        <textarea id="fMsg" name="message" placeholder="Tell me about your project…"></textarea>
+        <div class="form-group">
+  <label>Message</label>
+  <textarea id="fMsg" name="message" placeholder="Tell me about your project..."></textarea>
+</div>
  
         <input type="hidden" id="access_key" value="61a98c70-76a3-4b2b-861d-963c27ce393a">
         <button class="form-submit" onclick="sendForm()">Send Message →</button>
