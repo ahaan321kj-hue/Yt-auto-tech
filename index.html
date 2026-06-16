@@ -825,7 +825,7 @@ document
   .appendChild(renderer.domElement);
 
 camera.position.z = 5;
-const particlesCount = 4000;
+const particlesCount = 2000;
 
 const positions = new Float32Array(
   particlesCount * 3
@@ -846,8 +846,10 @@ geometry.setAttribute(
 );
 
 const material = new THREE.PointsMaterial({
-  size: 0.15,
-  color: 0x00ffcc
+  size: 0.04,
+  color: 0x4fd1ff,
+  transparent: true,
+  opacity: 0.8
 });
 
 const particles = new THREE.Points(
@@ -860,8 +862,8 @@ scene.add(particles);
 function animate(){
   requestAnimationFrame(animate);
 
-  particles.rotation.y += 0.0015;
-  particles.rotation.x += 0.0003;
+  particles.rotation.y += 0.00015;
+  particles.rotation.x += 0.00005;
 
   renderer.render(scene, camera);
 }
