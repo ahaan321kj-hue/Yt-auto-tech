@@ -47,7 +47,15 @@ nav{position:fixed;top:0;width:100%;z-index:999;padding:16px 5%;display:flex;ali
   z-index:0;
   overflow:hidden;
 }
-
+#tesseract-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+  z-index:1;
+  pointer-events:none;
+}
 #particle-bg canvas{
   width:100%;
   height:100%;
@@ -304,6 +312,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 5%;d
 <!-- HERO -->
 <section id="hero">
   <div id="particle-bg"></div>
+  <iframe
+  src="tesseract2_0it.html"
+  id="tesseract-bg">
+</iframe>
   <div class="hero-bg"></div>
   <div class="hero-noise"></div>
   <div class="hero-inner">
